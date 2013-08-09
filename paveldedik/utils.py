@@ -12,7 +12,9 @@ _slug_regex = re.compile(r'[\t !"#$%&\'()*\-/<=>?@\[\\\]^_`{|},.]+')
 
 
 def to_html(text):
-    """Convert a markdown string to HTML and return HTML as a unicode string.
+    """Converts a markdown string to a HTML document. Uses the `CodeHilite
+    <http://pythonhosted.org/Markdown/extensions/code_hilite.html>`_
+    extension.
 
     :type text: string or unicode
     :rtype: :class:`jinja2.Markup` object
@@ -24,6 +26,7 @@ def to_html(text):
 def slugify(text, delim=u'-', length=60):
     """Generates an ASCII-only slug. A slug is the part of a URL which
     identifies a page using human-readable keywords.
+    See `Generating Slugs<http://flask.pocoo.org/snippets/5/>`_.
 
     :type text: unicode
     :param delim: Separator for white space characters. Default is hyphen.

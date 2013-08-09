@@ -11,7 +11,7 @@ from paveldedik import db
 
 
 class User(db.Document):
-    """Representation of an user."""
+    """Representation of a User."""
 
     #: User's email address. Reqired field.
     email = db.StringField(required=True)
@@ -51,24 +51,24 @@ UserForm = model_form(User)
 
 
 class Post(db.Document):
-    """Representation of an article."""
+    """Representation of a Post."""
 
-    #: Unique identification of the article, 50 characters at most.
+    #: Unique identification of the post, 50 characters at most.
     post_id = db.StringField(max_length=50)
 
-    #: Title of the article, 120 characters at most. Required field.
+    #: Title of the post, 120 characters at most. Required field.
     title = db.StringField(max_length=120, required=True)
 
     #: Leading paragraph of the articel. Required field.
     leading = db.StringField(required=True)
 
-    #: Content of the article. Required field.
+    #: Content of the post. Required field.
     content = db.StringField(required=True)
 
-    #: Date and time when the article was published.
+    #: Date and time when the post was published.
     published = db.DateTimeField(default=datetime.now(), required=True)
 
-    #: Author of the article. Optional field.
+    #: Author of the post. Optional field.
     author = db.ReferenceField(User)
 
     #: List of tags, 30 characters at most for each tag. Optional field.

@@ -34,7 +34,7 @@ def show_post(post_id):
 
 @app.route('/posts/new', methods=['GET', 'POST'])
 def add_post():
-    """Displays form for creation of a new post. If the form is submitted
+    """Displays form for creation of a new post. If the form is submitted,
     the post is saved in the database.
 
     :return: HTML document.
