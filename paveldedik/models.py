@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 
 
-from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
+
+from flask.ext.mongoengine.wtf import model_form
+from werkzeug.security import (generate_password_hash,
+                               check_password_hash)
 
 from paveldedik import db
 
@@ -43,11 +47,14 @@ class User(db.Document):
         return check_password_hash(self.password, value)
 
 
+UserForm = model_form(User)
+
+
 class Post(db.Document):
     """Representation of an article."""
 
     #: Unique identification of the article, 50 characters at most.
-    post_id = db.StringField(max_length=50, required=True)
+    post_id = db.StringField(max_length=50)
 
     #: Title of the article, 120 characters at most. Required field.
     title = db.StringField(max_length=120, required=True)
@@ -57,6 +64,9 @@ class Post(db.Document):
 
     #: Content of the article. Required field.
     content = db.StringField(required=True)
+
+    #: Date and time when the article was published.
+    published = db.DateTimeField(default=datetime.now(), required=True)
 
     #: Author of the article. Optional field.
     author = db.ReferenceField(User)
@@ -71,3 +81,6 @@ class Post(db.Document):
              'sparse': True, 'types': False},
         ],
     }
+
+
+PostForm = model_form(Post)
