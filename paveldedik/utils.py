@@ -7,6 +7,8 @@ from unicodedata import normalize
 import jinja2
 from markdown import markdown
 
+from paveldedik import app
+
 
 _slug_regex = re.compile(r'[\t !"#$%&\'()*\-/<=>?@\[\\\]^_`{|},.]+')
 
@@ -19,8 +21,15 @@ def to_html(text):
     :type text: string or unicode
     :rtype: :class:`jinja2.Markup` object
     """
-    result = markdown(text, extensions=['codehilite'])
+    codehilite = 'codehilite(linenums={0}, guess_lang={1})'.format(
+        app.config['CODEHILITE_LINENUMS'],
+        app.config['CODEHILITE_GUESS_LANG'])
+    result = markdown(text, extensions=[codehilite])
     return jinja2.Markup(result)
+
+
+#: Put the :func:`to_html` in jinja2 filters.
+app.jinja_env.filters['html'] = to_html
 
 
 def slugify(text, delim=u'-', length=60):
