@@ -3,7 +3,6 @@
 
 from datetime import datetime
 
-from flask.ext.mongoengine.wtf import model_form
 from werkzeug.security import (generate_password_hash,
                                check_password_hash)
 
@@ -47,9 +46,6 @@ class User(db.Document):
         return check_password_hash(self.password, value)
 
 
-UserForm = model_form(User)
-
-
 class Post(db.Document):
     """Representation of a Post."""
 
@@ -81,6 +77,3 @@ class Post(db.Document):
              'sparse': True, 'types': False},
         ],
     }
-
-
-PostForm = model_form(Post)
