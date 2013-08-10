@@ -3,8 +3,12 @@
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block content %}
-  <div class="pull-right text-muted">{{ post.published.strftime('%B %d, %Y') }}</div>
-  <h1 class="page-header">{{ post.title }}</h1>
-  <p class="lead">{{ post.leading }}</p>
-  {{ post.content|html }}
+  <div class="post">
+    <h1 class="page-header">
+      <small class="pull-right text-muted">{{ post.published.strftime('%B %d, %Y') }}</small>
+      {{ post.title }}
+    </h1>
+    <p class="lead">{{ post.leading }}</p>
+    {{ post.content|html }}
+  </div>
 {% endblock %}
