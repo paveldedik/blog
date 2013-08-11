@@ -35,15 +35,36 @@ def show_post(post_id):
 
 @app.route('/posts/new', methods=['GET', 'POST'])
 def add_post():
-    """Displays form for creation of a new post. If the form is submitted,
+    """Displays a form for creation of a new post. If the form is submitted,
     the post is saved in the database.
 
     :return: HTML document.
     """
     form = PostForm(request.form)
+
     if form.validate_on_submit():
         post_id = slugify(form.title.data)
-        Post(title=form.title.data, leading=form.leading.data,
-             content=form.content.data, post_id=post_id).save()
+        post = Post(post_id=post_id)
+        form.populate_obj(post)
+        post.save()
         return redirect(url_for('show_post', post_id=post_id))
-    return render_template('new_post.html', form=form)
+
+    return render_template('form_post.html', form=form, action=request.url)
+
+
+@app.route('/posts/edit/<string:post_id>', methods=['GET', 'POST'])
+def edit_post(post_id):
+    """Displays a form for editing the existing post. If the form is
+    submitted, the post is saved in the database.
+
+    :return: HTML document.
+    """
+    post = Post.objects.get_or_404(post_id=post_id)
+    form = PostForm(request.form, post)
+
+    if form.validate_on_submit():
+        form.populate_obj(post)
+        post.save()
+        return redirect(url_for('show_post', post_id=post_id))
+
+    return render_template('form_post.html', form=form, action=request.url)
