@@ -92,3 +92,13 @@ p.lead {
   margin-top: 15px;
   font-size: 18px;
 }
+
+.fixed-bottom {
+  position: fixed;
+  right: 20px;
+  bottom: 30px;
+}
+
+.fixed-bottom .btn {
+  font-size: 16px;
+}
