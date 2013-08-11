@@ -2,9 +2,8 @@
 
 
 import re
-from unicodedata import normalize
-
 import jinja2
+from unicodedata import normalize
 from markdown import markdown
 
 from paveldedik import app

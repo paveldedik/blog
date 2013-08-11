@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from paveldedik import app, db
+
 from flask.ext.script import Manager
+
+from paveldedik import app, db
 
 
 manager = Manager(app)
