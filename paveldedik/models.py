@@ -2,7 +2,6 @@
 
 
 from datetime import datetime
-
 from werkzeug.security import (generate_password_hash,
                                check_password_hash)
 
@@ -50,7 +49,7 @@ class Post(db.Document):
     """Representation of a Post."""
 
     #: Unique identification of the post, 50 characters at most.
-    post_id = db.StringField(max_length=50)
+    post_id = db.StringField(max_length=50, required=True)
 
     #: Title of the post, 120 characters at most. Required field.
     title = db.StringField(max_length=120, required=True)
@@ -72,8 +71,6 @@ class Post(db.Document):
 
     #: Register the index.
     meta = {
-        'indexes': [
-            {'fields': ['-post_id'], 'unique': True,
-             'sparse': True, 'types': False},
-        ],
+        'indexes': ['post_id'],
+        'ordering': ['-created_at']
     }
