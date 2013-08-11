@@ -61,7 +61,7 @@ class Post(db.Document):
     content = db.StringField(required=True)
 
     #: Date and time when the post was published.
-    published = db.DateTimeField(default=datetime.now(), required=True)
+    published = db.DateTimeField(default=datetime.now, required=True)
 
     #: Author of the post. Optional field.
     author = db.ReferenceField(User)
