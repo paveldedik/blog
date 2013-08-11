@@ -10,6 +10,9 @@ DEBUG = True
 #: Secret key in order to use sessions and CSRF validation.
 SECRET_KEY = 'development key'
 
+#: Enable or disable CSRF validation.
+CSRF_ENABLED = True
+
 #: Mongo database settings.
 MONGODB_SETTINGS = {'DB': app.name}
 
