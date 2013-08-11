@@ -5,6 +5,7 @@
   <title>{% block title %}Blog{% endblock %} | Pavel Dedík</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css">
   <link rel="stylesheet" href="/static/css/custom.css">
   <link rel="stylesheet" href="/static/css/pygments.css">
   {% endblock %}
@@ -41,6 +42,13 @@
           </p>
         {% endfor %}
         </div>
+      {% endblock %}
+    </div>
+    <div class="fixed-bottom">
+      {% block admin %}
+      <a href="{{ url_for('add_post') }}" class="btn btn-info" title="New Post">
+        <i class="icon-pencil"></i>
+      </a>
       {% endblock %}
     </div>
   </div>

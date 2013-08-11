@@ -4,9 +4,9 @@
 {% block title %}New Post{% endblock %}
 
 {% block content %}
-<form method="POST" action="{{ url_for('add_post') }}">
+<form method="POST" action="{{ action }}">
   <fieldset>
-    <legend>Add an Article</legend>
+    <legend>Add a Post</legend>
     {{ form.csrf_token }}
     {{ render_field(form.title) }}
     {{ render_field(form.leading, rows='5') }}
