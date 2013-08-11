@@ -8,7 +8,7 @@ from paveldedik.models import User, Post
 
 #: Model the user form. Additional field arguments can be included using
 #: the key-word argument ``field_args``. For more information about using
-#: WTForms follow `this link<http://flask.pocoo.org/snippets/60/>`_.
+#: WTForms follow `Flask snippets<http://flask.pocoo.org/snippets/60/>`_.
 UserForm = model_form(User)
 
 #: Model the post form. The attribute ``post_is`` must be excluded so that

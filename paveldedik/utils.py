@@ -27,7 +27,7 @@ def to_html(text):
     return jinja2.Markup(result)
 
 
-#: Put the :func:`to_html` in jinja2 filters.
+#: Put the :func:`to_html` in for the jinja2 filters.
 app.jinja_env.filters['html'] = to_html
 
 
