@@ -3,7 +3,7 @@
 
 from flask import render_template, request, redirect, url_for
 
-from paveldedik import app
+from paveldedik import app, filters
 from paveldedik.utils import slugify
 from paveldedik.forms import PostForm
 from paveldedik.models import Post
