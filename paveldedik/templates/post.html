@@ -5,7 +5,7 @@
 {% block content %}
   <div class="post">
     <h1 class="page-header">
-      <small class="pull-right text-muted">{{ post.published.strftime('%B %d, %Y') }}</small>
+      <small class="pull-right text-muted">{{ post.published|date }}</small>
       {{ post.title }}
     </h1>
     <p class="lead">{{ post.leading }}</p>

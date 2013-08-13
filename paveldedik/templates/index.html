@@ -44,6 +44,9 @@
         </div>
       {% endblock %}
     </div>
+    <div class="copyright">
+      {{ '2013'|copyright }}
+    </div>
     <div class="fixed-bottom">
       {% block admin %}
       <a href="{{ url_for('add_post') }}" class="btn btn-info" title="New Post">
