@@ -6,6 +6,7 @@ from datetime import date
 
 from markdown import markdown
 from paveldedik import app
+from paveldedik.utils import slugify
 
 
 @app.template_filter('html')
@@ -49,3 +50,14 @@ def to_date(datum, format='%B %d, %Y'):
     :rtype: :class:`jinja2.Markup` object
     """
     return datum.strftime(format)
+
+
+@app.template_filter('slug')
+def create_slug(text):
+    """Creates a slug from the given string. See
+    :func:`~paveldedik.utils.slugify`.
+
+    :type text: string
+    :rtype: string
+    """
+    return slugify(text)
