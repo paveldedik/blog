@@ -57,7 +57,7 @@ def create_slug(text):
     """Creates a slug from the given string. See
     :func:`~paveldedik.utils.slugify`.
 
-    :type text: string
-    :rtype: string
+    :type text: unicode
+    :rtype: unicode
     """
-    return slugify(text)
+    return slugify(text, length=None)

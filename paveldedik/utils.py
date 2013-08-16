@@ -21,8 +21,8 @@ def slugify(text, delim=u'-', length=60):
     :rtype: unicode
     """
     result = []
-    text = text[:length].lower()
-    for word in _slug_regex.split(text):
+    text = text if length is None else text[:length]
+    for word in _slug_regex.split(text.lower()):
         word = normalize('NFKD', word).encode('ascii', 'ignore')
         if word:
             result.append(word)
