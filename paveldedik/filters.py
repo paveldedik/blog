@@ -37,7 +37,7 @@ def print_copyright(year):
         copyright = str(year)
     else:
         copyright = '{0}-{1}'.format(year, current_year)
-    return jinja2.Markup(u'&copy; copyright' + copyright)
+    return jinja2.Markup(u'&copy; copyright ' + copyright)
 
 
 @app.template_filter('date')
