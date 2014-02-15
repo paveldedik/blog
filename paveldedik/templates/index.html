@@ -4,8 +4,8 @@
   {% block head %}
   <title>{% block title %}Blog{% endblock %} | Pavel Dedík</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
   <link rel="stylesheet" href="/static/css/custom.css">
   <link rel="stylesheet" href="/static/css/pygments.css">
   {% endblock %}
@@ -50,13 +50,13 @@
     <div class="fixed-bottom">
       {% block admin %}
       <a href="{{ url_for('add_post') }}" class="btn btn-info" title="New Post">
-        <i class="icon-pencil"></i>
+        <i class="fa fa-pencil"></i>
       </a>
       {% endblock %}
     </div>
   </div>
   <script src="http://code.jquery.com/jquery.min.js"></script>
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   <script src="/static/js/plugins/jquery.autosize.min.js"></script>
   <script src="/static/js/custom.js"></script>
 </body>
