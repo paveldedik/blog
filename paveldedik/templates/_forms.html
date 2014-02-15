@@ -1,0 +1,33 @@
+{% macro render_field(field) %}
+  {% if field.errors %}
+  <div class="form-group has-error">
+  {% else %}
+  <div class="form-group">
+  {% endif %}
+    <label for="{{ field.id }}" class="control-label">{{ field.label.text }}
+      {% if field.flags.required %}*{% endif %}
+    </label>
+    {{ field(class='form-control', **kwargs)|safe }}
+  </div>
+{% endmacro %}
+
+{%- macro render_errors(form) -%}
+  {%- if form.errors -%}
+    <div class="alert alert-danger">
+      <h3>{{ 'Sorry, something isn\'t all right' }}</h3>
+      <ol>
+        {%- for field_name, field_errors in form.errors.items() -%}
+          {%- if field_name in form -%}
+            {%- for error in field_errors -%}
+              <li><strong>{{ form[field_name].label }}</strong> {{ error }}</li>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for error in field_errors -%}
+              <li><strong>{{ field_name.capitalize() }}</strong> {{ error }}</li>
+            {%- endfor -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </ol>
+    </div>
+  {%- endif -%}
+{%- endmacro -%}

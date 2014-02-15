@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-  <link rel="stylesheet" href="/static/css/custom.css">
-  <link rel="stylesheet" href="/static/css/pygments.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/pygments.css') }}">
   {% endblock %}
 </head>
 <body>
@@ -23,7 +23,7 @@
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li class="active"><a href="/blog">Blog</a></li>
+          <li class="active"><a href="{{ url_for('home') }}">Blog</a></li>
           <li><a href="#about">Projects</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
@@ -36,7 +36,7 @@
           <h3>{{ post.title }}</a></h3>
           <p class="mini">{{ post.leading }}</p>
           <p>
-            <a href="{{ url_for('show_post', post_id=post.post_id) }}" class="btn btn-default">
+            <a href="{{ url_for('post_show', slug=post.slug) }}" class="btn btn-default">
               Read More &raquo;
             </a>
           </p>
@@ -44,20 +44,22 @@
         </div>
       {% endblock %}
     </div>
-    <div class="copyright">
-      {{ '2013'|copyright }}
+  </div>
+  <div class="container">
+    <div class="copyright pull-right">
+      <small>{{ '2013'|copyright }}</small>
     </div>
-    <div class="fixed-bottom">
-      {% block admin %}
-      <a href="{{ url_for('add_post') }}" class="btn btn-info" title="New Post">
-        <i class="fa fa-pencil"></i>
-      </a>
-      {% endblock %}
-    </div>
+  </div>
+  <div class="fixed-bottom">
+    {% block admin %}
+    <a href="{{ url_for('post_create') }}" class="btn btn-default" title="New Post">
+      <i class="fa fa-pencil"></i>
+    </a>
+    {% endblock %}
   </div>
   <script src="http://code.jquery.com/jquery.min.js"></script>
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-  <script src="/static/js/plugins/jquery.autosize.min.js"></script>
-  <script src="/static/js/custom.js"></script>
+  <script src="{{ url_for('static', filename='js/jquery.autosize.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
 </body>
 </html>

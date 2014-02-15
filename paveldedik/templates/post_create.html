@@ -1,12 +1,13 @@
 {% extends "index.html" %}
-{% from "_macros.html" import render_field %}
+{% from "_forms.html" import render_field, render_errors %}
 
 {% block title %}New Post{% endblock %}
 
 {% block content %}
-<form method="POST" action="{{ action }}">
+<form method="POST" action="{{ url_for('post_create') }}">
   <fieldset>
     <legend>Add a Post</legend>
+    {{ render_errors(form) }}
     {{ form.csrf_token }}
     {{ render_field(form.title) }}
     {{ render_field(form.leading, rows='5') }}
