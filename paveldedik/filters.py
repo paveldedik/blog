@@ -5,8 +5,9 @@ import jinja2
 from datetime import date
 
 from markdown import markdown
-from paveldedik import app
-from paveldedik.utils import slugify
+
+from .utils import slugify
+from . import app, __author__ as author
 
 
 @app.template_filter('html')
@@ -34,10 +35,11 @@ def print_copyright(year):
     """
     current_year = date.today().year
     if current_year == year:
-        copyright = str(year)
+        period = str(year)
     else:
-        copyright = '{0}-{1}'.format(year, current_year)
-    return jinja2.Markup(u'&copy; copyright ' + copyright)
+        period = '{0}&ndash;{1}'.format(year, current_year)
+    copyright = u'&copy; {}&nbsp;&nbsp;{}'
+    return jinja2.Markup(copyright.format(period, author))
 
 
 @app.template_filter('date')

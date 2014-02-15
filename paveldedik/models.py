@@ -5,7 +5,8 @@ from datetime import datetime
 from werkzeug.security import (generate_password_hash,
                                check_password_hash)
 
-from paveldedik import db
+from . import db
+from .utils import slugify
 
 
 class User(db.Document):
@@ -48,8 +49,13 @@ class User(db.Document):
 class Post(db.Document):
     """Representation of a Post."""
 
-    #: Unique identification of the post, 50 characters at most.
-    post_id = db.StringField(max_length=50, required=True)
+    #: Register the index.
+    meta = {
+        'ordering': ['-created_at']
+    }
+
+    #: Unique identification of the post.
+    slug = db.StringField(primary_key=True)
 
     #: Title of the post, 120 characters at most. Required field.
     title = db.StringField(max_length=120, required=True)
@@ -69,8 +75,10 @@ class Post(db.Document):
     #: List of tags, 30 characters at most for each tag. Optional field.
     tags = db.ListField(db.StringField(max_length=30))
 
-    #: Register the index.
-    meta = {
-        'indexes': ['post_id'],
-        'ordering': ['-created_at']
-    }
+    @classmethod
+    def from_form(cls, form):
+        """Create instance of the post from the form."""
+        slug = slugify(form.title.data)
+        post = Post(pk=slug)
+        form.populate_obj(post)
+        return post

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-from paveldedik import app
+from . import app
 
 
 #: Debug mode enabled by default.

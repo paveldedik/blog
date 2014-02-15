@@ -15,3 +15,4 @@ db = MongoEngine(app)
 
 
 import paveldedik.views  # noqa
+import paveldedik.filters  # noqa
