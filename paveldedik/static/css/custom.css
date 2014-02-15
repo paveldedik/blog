@@ -32,13 +32,30 @@ pre {
   white-space: pre;
 }
 
-p, ul, pre {
-  margin-bottom: 25px;
+blockquote {
+  border: 1px solid #ccc;
+  border-left: 5px solid #bbb;
+  background: #f8f8f8;
+  font-style: italic;
+}
+
+p, ul, ol, pre {
+  margin-bottom: 20px;
   line-height: 25px;
 }
 
 p.lead {
   font-size: 20px;
+}
+
+.body li {
+  margin-bottom: 5px;
+}
+
+.body li ul,
+.body li ol {
+  margin-bottom: 10px;
+  margin-top: 6px;
 }
 
 .mini {
@@ -79,6 +96,10 @@ p.lead {
   border-bottom: 1px solid #222;
 }
 
+.posts h3 > a {
+  color: #555;
+}
+
 .lead {
   margin: 30px 0;
 }
@@ -101,6 +122,11 @@ p.lead {
 
 .fixed-bottom .btn {
   font-size: 16px;
+}
+
+.fixed-bottom i {
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 .copyright {

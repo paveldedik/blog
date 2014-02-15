@@ -16,7 +16,7 @@
 {% block admin %}
   {% set edit_post_url = url_for('post_edit', slug=post.slug) %}
   <a href="{{ edit_post_url }}" class="btn btn-default" title="Edit Post">
-    <i class="fa fa-wrench"></i>
+    <i class="fa fa-wrench fa-lg"></i>
   </a>
   {{ super() }}
 {% endblock %}
