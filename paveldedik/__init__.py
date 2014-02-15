@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+__author__ = 'Pavel Dedik'
+__version__ = '0.1'
+
 
 from flask import Flask
 from flask.ext.mongoengine import MongoEngine
@@ -11,4 +14,4 @@ app.config.from_object('paveldedik.config')
 db = MongoEngine(app)
 
 
-from paveldedik import views
+import paveldedik.views  # noqa
