@@ -23,9 +23,6 @@ class User(db.Document, UserMixin):
     #: User's email address. Reqired field.
     email = db.StringField(required=True)
 
-    #: User's password. Reqired field.
-    password = db.StringField(max_length=100, required=True)
-
     #: User's first name, 50 characters at most.
     first_name = db.StringField(max_length=50)
 
