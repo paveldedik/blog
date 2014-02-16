@@ -4,7 +4,7 @@
 {% block title %}New Post{% endblock %}
 
 {% block content %}
-<form method="POST" action="{{ url_for('post_create') }}">
+<form method="POST" action="{{ url_for('post_create') }}" role="form">
   <fieldset>
     <legend>Add a Post</legend>
     {{ render_errors(form) }}

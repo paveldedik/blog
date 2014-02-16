@@ -1,15 +1,17 @@
-{% macro render_field(field) %}
-  {% if field.errors %}
+{%- macro render_field(field, label=True) -%}
+  {%- if field.errors -%}
   <div class="form-group has-error">
-  {% else %}
+  {%- else -%}
   <div class="form-group">
-  {% endif %}
-    <label for="{{ field.id }}" class="control-label">{{ field.label.text }}
-      {% if field.flags.required %}*{% endif %}
-    </label>
+  {%- endif -%}
+    {%- if label -%}
+      <label for="{{ field.id }}" class="control-label">{{ field.label.text }}
+        {%- if field.flags.required -%}*{%- endif -%}
+      </label>
+    {%- endif -%}
     {{ field(class='form-control', **kwargs)|safe }}
   </div>
-{% endmacro %}
+{%- endmacro -%}
 
 {%- macro render_errors(form) -%}
   {%- if form.errors -%}

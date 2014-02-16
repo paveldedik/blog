@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% from "_macros.html" import flash_messages %}
+{% from "_forms.html" import render_field, render_errors %}
+
+{% block head %}
+  <title>Login</title>
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
+
+{% block body %}
+  <div class="container">
+    <form class="form-signin" method="POST" action="{{ url_for('login') }}" role="form">
+      {{ flash_messages() }}
+      <h2 class="form-signin-heading">Please sign in</h2>
+      {{ render_errors(form) }}
+      {{ form.csrf_token }}
+      {{ render_field(form.username, placeholder='Username',
+                      type='text', label=False) }}
+      {{ render_field(form.password, placeholder='Password',
+                      type='password', label=False) }}
+      <label class="checkbox">
+        <input name="remember" value="remember-me" type="checkbox"> Remember me
+      </label>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+  </div>
+{% endblock %}

@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-  {% block head %}
+{% extends "base.html" %}
+
+{% block head %}
+  {{ super() }}
   <title>{% block title %}Blog{% endblock %} | Pavel Dedík</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/pygments.css') }}">
-  {% endblock %}
-</head>
-<body>
+{% endblock %}
+
+{% block body %}
   <div class="container wrap">
     <div class="navbar navbar-default">
       <div class="navbar-header">
@@ -57,9 +52,4 @@
     </a>
     {% endblock %}
   </div>
-  <script src="http://code.jquery.com/jquery.min.js"></script>
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-  <script src="{{ url_for('static', filename='js/jquery.autosize.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
-</body>
-</html>
+{% endblock %}
