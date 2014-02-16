@@ -2,6 +2,8 @@
 
 
 from datetime import datetime
+
+from flask.ext.login import UserMixin
 from werkzeug.security import (generate_password_hash,
                                check_password_hash)
 
@@ -9,14 +11,17 @@ from . import db
 from .utils import slugify
 
 
-class User(db.Document):
+class User(db.Document, UserMixin):
     """Representation of a User."""
+
+    #: User's nick, 30 characters at most. Reqired field.
+    username = db.StringField(primary_key=True, max_length=30)
+
+    #: User's password. Reqired field.
+    password = db.StringField(required=True, max_length=100)
 
     #: User's email address. Reqired field.
     email = db.StringField(required=True)
-
-    #: User's nick, 30 characters at most. Reqired field.
-    username = db.StringField(max_length=30, required=True)
 
     #: User's password. Reqired field.
     password = db.StringField(max_length=100, required=True)
@@ -44,6 +49,26 @@ class User(db.Document):
         :type value: string
         """
         return check_password_hash(self.password, value)
+
+    @classmethod
+    def find(cls, name):
+        """Gets user by their username. Returns :obj:`None` if
+        no such user exists.
+        """
+        return cls.objects.filter(username=name).first()
+
+    @classmethod
+    def authenticate(cls, form):
+        """Gets the user's instance by username and checks
+        their passowrd.
+
+        :param form: Instance of :class:`~paveldedik.forms.LoginForm`.
+        """
+        user = cls.find(name=form.username.data)
+        if user is not None:
+            return user, user.check_password(form.password.data)
+        else:
+            return None, False
 
 
 class Post(db.Document):

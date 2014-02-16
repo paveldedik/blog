@@ -2,11 +2,13 @@
 
 
 from flask.views import MethodView
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, flash
+from flask.ext.login import (login_required, current_user, login_user,
+                             logout_user)
 
 from .utils import route
-from .models import Post
-from .forms import PostForm
+from .models import Post, User
+from .forms import PostForm, LoginForm
 
 
 @route('/')
@@ -16,6 +18,56 @@ class Home(MethodView):
     def get(self):
         posts = Post.objects.all()
         return render_template('index.html', posts=posts)
+
+
+@route('/login/')
+class Login(MethodView):
+    """Logs the user in the application."""
+
+    def get_context(self):
+        """Just a simple method to keep the code DRY.
+        Returns an instance of PostForm.
+        """
+        return LoginForm(request.form)
+
+    def get(self):
+        """If the user is already authenticated, redirect them to *home*.
+        Otherwise render authentication form.
+        """
+        if current_user.is_authenticated():
+            return redirect(url_for('home'))
+        form = self.get_context()
+        return render_template('login.html', form=form)
+
+    def post(self):
+        """If the user has entered correct username end password
+        they are authenticated.
+        """
+        form = self.get_context()
+        if form.validate():
+            user, authenticated = User.authenticate(form)
+            if authenticated:
+                remember_me = bool(request.form.get('remember'))
+                login_user(user, remember=remember_me)
+                return redirect(request.args.get('next') or url_for('home'))
+            else:
+                flash('Invalid username or password.', 'error')
+        return render_template('login.html', form=form)
+
+
+@route('/logout/')
+class Logout(MethodView):
+    """Logouts the user from the application."""
+
+    decorators = [login_required]
+
+    def get(self):
+        """If the user is already authenticated, redirect them to *home*.
+        Otherwise render authentication form.
+        """
+        if current_user.is_authenticated():
+            logout_user()
+            return redirect(url_for('home'))
 
 
 @route('/posts/<string:slug>')
@@ -32,6 +84,7 @@ class PostCreate(MethodView):
     """Displays a form for creation of a new post. If the form is
     submitted, the post is saved in the database.
     """
+    decorators = [login_required]
 
     def get_context(self):
         """Just a simple method to keep the code DRY.
@@ -60,6 +113,7 @@ class PostEdit(MethodView):
     """Displays a form for editing an existing post. If the form is
     submitted, the moddifications are saved in the database.
     """
+    decorators = [login_required]
 
     def get_context(self, slug):
         """Just a simple method to keep the code DRY.

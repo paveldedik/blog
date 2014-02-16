@@ -9,7 +9,7 @@ from .models import User, Post
 #: Model the user form. Additional field arguments can be included using
 #: the key-word argument ``field_args``. For more information about using
 #: WTForms follow `Flask snippets<http://flask.pocoo.org/snippets/60/>`_.
-UserForm = model_form(User)
+LoginForm = model_form(User, only=['username', 'password'])
 
 #: Model the post form. The attribute ``post_is`` must be excluded so that
 #: the field is not required during form validation and it is not rewritten
